@@ -1,11 +1,20 @@
 <template>
   <div class="area-envio flex no-wrap">
+    <button class="btn-enviar" @click="enviaMsg(msg)" type="button">
+      <q-icon name="unarchive" color="black"/>
+    </button>
+
     <textarea class="envio-input" rows="4" cols="50"
           placeholder="Escreva uma mensagem" v-model="msg">
     </textarea>
+    <router-link class="flex" :to="{ path: `/gifs/${this.id}`}">
+        <button class="btn-enviar" type="button">
+        <q-icon self-center name="gif" style="font-size: 30px" color="red"/> </button>
+    </router-link>
     <button class="btn-enviar" @click="enviaMsg(msg)" type="button">
       <q-icon name="send" :color="cor"/>
     </button>
+
   </div>
 </template>
 
@@ -19,7 +28,7 @@
     data(){
        return {
          msg: '',
-         
+
        }
     },
     computed: {
@@ -47,12 +56,12 @@
           }
       },
     }
-    
+
   }
 </script>
 
 <style>
-  
+
   .area-envio{
     position: fixed;
     width: 100%;

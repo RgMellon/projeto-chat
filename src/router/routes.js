@@ -28,7 +28,13 @@ export default [
       { path: ':id', props:true, component: () => import('pages/bate-papo-page') }
     ]
   },
-  
+  {
+    path: '/gifs',
+    component: () => import('layouts/bate-papo'),
+    children: [
+      { path: ':id', props:true, component: () => import('pages/gifs-page') }
+    ]
+  },
 
   { // Always leave this as last one
     path: '*',
