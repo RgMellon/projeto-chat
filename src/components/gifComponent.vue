@@ -1,13 +1,16 @@
 <template>
   <div>
+    <div v-if="this.erro">
+        {{ erro }}
+    </div>
     <div>
         <img @click="enviaMsg(g.images.original.url)" v-for="g in giphies" :key="g.id" :src="g.images.original.url">
     </div>
     <div class="input-gif flex justify-between ">
       <input name="title" v-model="item" placeholder="Buscar gifs">
-      <button class="btn-enviar" @click="buscaGif()" type="button">
-        <q-icon name="search" color="grey"/>
-      </button>
+      <div  class="btn-gif">
+        <q-btn :loading="load" color="info" @click="buscaGif()" label="Buscar" no-caps />
+      </div>
     </div>
   </div>
 </template>
@@ -21,15 +24,22 @@ export default {
     return {
       item: '',
       giphies: [],
+      load: false,
+      erro: '',
     }
   },
   methods:{
     buscaGif() {
+      this.load = true;
       var link = "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=";
       var apiLink = link + this.item;
       this.$axios.get(apiLink)
-                  .then(res =>  this.giphies = res.data.data)
-                  .catch(err => console.error(err));
+                  .then(res =>  {
+                    this.giphies = res.data.data
+                    this.load = false;
+                  })
+                  .catch(err => console.error(err))
+                  .catch(err => this.erro =  'Erro ao carregar gifs :/ ')
     },
     enviaMsg(msg){
       this.$firebase.ref(`salas/${this.idRoute}/msgs`).push({
@@ -68,5 +78,8 @@ export default {
     background: white;
     border: 0px;
     outline: none;
+  }
+  .btn-gif {
+    height: 32px;
   }
 </style>
