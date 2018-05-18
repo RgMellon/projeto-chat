@@ -2,8 +2,8 @@
   <q-page padding>
     <div class="flex justify-center" style="margin-top:2rem">
       <div class="img-upload shadow-1 flex justify-center">
-        <upload @addFile="uploadFile"  class="items-center"
-                 size="80" avatar="chat.png">
+        <upload @addFile="uploadFile" icon="add_a_photo" class="items-center" :mostraImagem="true"
+          size="80">
         </upload>
       </div>
     </div>

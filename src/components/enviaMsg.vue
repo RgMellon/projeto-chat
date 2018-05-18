@@ -1,35 +1,48 @@
 <template>
+  <div>
+  <!-- <div v-if="this.confirma">
+     <confirma-upload :imgConfirmacao="this.img"> </confirma-upload>
+  </div> -->
+  <img :src="this.img">
   <div class="area-envio flex no-wrap">
-    <button class="btn-enviar" @click="enviaMsg(msg)" type="button">
-      <q-icon name="unarchive" color="black"/>
-    </button>
+    <upload @addFile="uploadFile" class="items-center"
+      size="35" icon="unarchive" :mostraImagem="false">
+    </upload>
 
     <textarea class="envio-input" rows="4" cols="50"
           placeholder="Escreva uma mensagem" v-model="msg">
     </textarea>
+
     <router-link class="flex" :to="{ path: `/gifs/${this.id}`}">
         <button class="btn-enviar" type="button">
         <q-icon self-center name="gif" style="font-size: 30px" color="red"/> </button>
     </router-link>
+
     <button class="btn-enviar" @click="enviaMsg(msg)" type="button">
       <q-icon name="send" :color="cor"/>
     </button>
 
   </div>
+  </div>
 </template>
 
 <script>
+  import upload from './upload';
+  import confirmaUpload from './confirmaUpload';
   import { mapGetters } from 'vuex';
   export default {
     props:['id'],
     name: 'envio-msg',
     components: {
+      upload,
+      'confirma-upload' : confirmaUpload,
     },
     data(){
-       return {
-         msg: '',
-
-       }
+      return {
+        msg: '',
+        confirma: true,
+        img: '',
+      }
     },
     computed: {
       cor() {
@@ -55,6 +68,17 @@
             }).then(res => this.msg = '');
           }
       },
+      uploadFile(file) {
+       let reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.img = e.target.result;
+          console.log(this.img);
+        };
+
+
+      },
+
     }
 
   }
