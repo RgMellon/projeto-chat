@@ -46,7 +46,9 @@ export default {
                 email: this.user.email,
               });
           }
-        }).then(this.cancelar())
+          this.load = false;
+          this.cancelar();
+        })
     },
     cancelar(){
       this.$emit('acao');
