@@ -49,25 +49,16 @@ export default {
         this.escondeImg = boolean;
       },
       onFileChange(e) {
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length) return;
-        this.createImage(files[0]);
+        this.$createImg(e)
+          .then(res => {
+            this.imagem = res;
+            this.$emit('addFile', this.imagem)
+              if(this.escondeImg == false){
+                this.imagem = false
+              }
+            }
+          );
       },
-
-      createImage(file) {
-       let reader = new FileReader();
-
-        reader.onload = (e) => {
-          this.imagem = e.target.result;
-          this.$emit('addFile', this.imagem);
-          if(this.escondeImg == false){
-           this.imagem = false
-          }
-        };
-
-        reader.readAsDataURL(file);
-      },
-
       removeImage(e) {
         this.imagem = '';
         this.$emit('addFile', null);

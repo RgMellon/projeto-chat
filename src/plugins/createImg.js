@@ -1,7 +1,18 @@
+
 export default ({ Vue }) => {
-  Vue.prototype.$createImg = (file) => {
-    let files = event.target.files || event.dataTransfer.files;
+  Vue.prototype.$createImg = (e) => {
+    let files = e.target.files || e.dataTransfer.files;
     if (!files.length) return;
-    this.createImage(files[0])
-  }
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        let imagem = e.target.result;
+        resolve(imagem);
+        reject('erro ao criar imagrm (creatImg)')
+      }
+      reader.readAsDataURL(files[0]);
+    });
+
+  };
+
 }

@@ -1,46 +1,46 @@
 <template>
   <div>
-  <!-- <div v-if="this.confirma">
-     <confirma-upload :imgConfirmacao="this.img"> </confirma-upload>
-  </div> -->
-  <img :src="this.img">
-  <div class="area-envio flex no-wrap">
-    <upload @addFile="uploadFile" class="items-center"
-      size="35" icon="unarchive" :mostraImagem="false">
-    </upload>
+    <div v-if="this.confirma">
+      <confirma-upload :imgConfirmacao="this.confirma"> </confirma-upload>
+    </div>
 
-    <textarea class="envio-input" rows="4" cols="50"
-          placeholder="Escreva uma mensagem" v-model="msg">
-    </textarea>
+    <div class="area-envio flex no-wrap">
+      <div style="align-self:center; background:white">
+        <label for="file-input" class="flex">
+          <q-icon style="margin-left:10px; font-size:20px"  name="unarchive"/>
+        </label>
+        <input id="file-input" type="file" accept="image/*" @change="onFileChange"/>
+      </div>
 
-    <router-link class="flex" :to="{ path: `/gifs/${this.id}`}">
-        <button class="btn-enviar" type="button">
-        <q-icon self-center name="gif" style="font-size: 30px" color="red"/> </button>
-    </router-link>
+      <textarea class="envio-input" rows="4" cols="50"
+        placeholder="Escreva uma mensagem" v-model="msg">
+      </textarea>
 
-    <button class="btn-enviar" @click="enviaMsg(msg)" type="button">
-      <q-icon name="send" :color="cor"/>
-    </button>
+      <router-link class="flex" :to="{ path: `/gifs/${this.id}`}">
+          <button class="btn-enviar" type="button">
+          <q-icon self-center name="gif" style="font-size: 30px" color="red"/> </button>
+      </router-link>
 
-  </div>
+      <button class="btn-enviar" @click="enviaMsg(msg)" type="button">
+        <q-icon name="send" :color="cor"/>
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
-  import upload from './upload';
   import confirmaUpload from './confirmaUpload';
   import { mapGetters } from 'vuex';
   export default {
     props:['id'],
     name: 'envio-msg',
     components: {
-      upload,
       'confirma-upload' : confirmaUpload,
     },
     data(){
       return {
         msg: '',
-        confirma: true,
+        confirma: '',
         img: '',
       }
     },
@@ -68,19 +68,12 @@
             }).then(res => this.msg = '');
           }
       },
-      uploadFile(file) {
-       let reader = new FileReader();
 
-        reader.onload = (e) => {
-          this.img = e.target.result;
-          console.log(this.img);
-        };
-
-
+      onFileChange(e) {
+        this.$createImg(e)
+          .then(res =>  this.confirma = res);
       },
-
     }
-
   }
 </script>
 
@@ -92,6 +85,7 @@
     bottom: 0;
     z-index: 4;
     right:0;
+    background: white;
   }
 
   .envio-input {
@@ -113,5 +107,8 @@
     background:white;
     border:0;
     outline: none;
+  }
+  #file-input{
+    display: none;
   }
 </style>
