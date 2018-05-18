@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="this.confirma">
-      <confirma-upload :imgConfirmacao="this.confirma"> </confirma-upload>
+    <div v-if="this.confirma.length >= 1">
+      <confirma-upload :id="this.id" @acao="acaoAposClicar" :imgConfirmacao="this.confirma"> </confirma-upload>
     </div>
 
     <div class="area-envio flex no-wrap">
@@ -73,6 +73,9 @@
         this.$createImg(e)
           .then(res =>  this.confirma = res);
       },
+      acaoAposClicar() {
+        this.confirma = '';
+      }
     }
   }
 </script>

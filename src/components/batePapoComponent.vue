@@ -11,7 +11,7 @@
         :bg-color="msg.bgColor"
         :name="msg.name"
         :avatar="msg.avatar"
-        :text="[msg.msg]"
+        :text="verificaMsg([msg.msg])"
         :stamp="String(msg.stamp)"
       />
     </div>
@@ -26,7 +26,7 @@ export default {
   data () {
     return {
       message: '',
-      
+
     }
   },
   created(){
@@ -41,6 +41,17 @@ export default {
   methods: {
     verificaEmail(email) {
       return this.user.email == email;
+    },
+    verificaMsg(msg) {
+      if(typeof(msg)){
+          let sub = String(msg).substring(0, 42);
+          let url = 'https://api-chat-aps.herokuapp.com/images/'
+          if(url == sub) {
+            return [`<img src="${[msg]}">`]
+          }else {
+            return msg;
+          }
+       }
     }
   }
 }

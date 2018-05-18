@@ -7,36 +7,52 @@
       </div>
 
       <div class="flex column" style="    align-self: center;">
-
-          <q-btn class="margin-btn" :loading="loading1" color="info" @click="simulateProgress(1)" label="Enviar" no-caps />
-          <q-btn class="margin-btn" color="deep-orange" no-caps label="Cancelar" />
-
+        <q-btn class="margin-btn" :loading="load" color="info" @click="enviaFoto()" label="Enviar" no-caps />
+        <q-btn class="margin-btn" color="deep-orange" no-caps label="Cancelar" @click="cancelar"/>
       </div>
 
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
-  props:['imgConfirmacao'],
+  props:['imgConfirmacao', 'id'],
   name: 'ComponentConfirmaUpload',
   data () {
     return {
-       loading1: false,
+       load: false,
 
     }
   },
+  computed:{
+    ...mapGetters({
+        user: "getUser"
+    }),
+  },
   methods: {
-    simulateProgress (number) {
-      // we set loading state
-      this[`loading${number}`] = true
-      // simulate a delay
-      setTimeout(() => {
-        // we're done, we reset loading state
-        this[`loading${number}`] = false
-      }, 3000)
+    enviaFoto() {
+      this.load = true;
+      this.$uploadImagem(this.imgConfirmacao)
+        .then(res => {
+          if (res.img == "") return;
+            else {
+              this.$firebase.ref(`salas/${this.id}/msgs`).push({
+                name: this.user.nome,
+                msg: `https://api-chat-aps.herokuapp.com/images/avatar/${res.img}/`,
+                sent: true,
+                avatar: this.user.foto,
+                stamp: new Date().toLocaleString(),
+                email: this.user.email,
+              });
+          }
+        }).then(this.cancelar())
     },
-}
+    cancelar(){
+      this.$emit('acao');
+    },
+  }
+
 }
 </script>
 
