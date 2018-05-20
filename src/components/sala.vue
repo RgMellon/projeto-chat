@@ -6,9 +6,9 @@
             <img :src="`http://api-chat-aps.herokuapp.com/images/avatar/${this.imagem}`" alt="">
           </div>
           <q-toolbar-title class="flex column justify-center">
-          <p style="color:black"> {{this.titulo}} </p>
-          <span slot="subtitle"> {{ this.subtitulo }}</span>
-        </q-toolbar-title>
+            <p style="color:black"> {{this.titulo}} </p>
+            <span slot="subtitle"> {{ this.subtitulo }}</span>
+          </q-toolbar-title>
         </div>
       </div>
   </li>
@@ -57,7 +57,7 @@
   .nome-desc {
     margin-left: 1rem;
   }
-  
+
   img{
     width: 60px;
     height: 60px;

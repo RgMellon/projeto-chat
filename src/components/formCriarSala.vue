@@ -1,10 +1,11 @@
 <template>
   <div>
     <q-field>
-      <q-input float-label="Nome" v-model="nome" class="input-cria-sala"/>
-      <q-input float-label="Descrição" class="input-cria-sala" v-model="descricao" />
-      <q-btn :loading="loading4" color="info" @click="criaSala(4)" class="full-width input-cria-sala">
-        Criar
+      <q-input float-label="Cidade" v-model="nome" class="input-cria-sala"/>
+      <q-input float-label="Descrição do problema" class="input-cria-sala" v-model="descricao" />
+      <q-btn :loading="loading4" color="info"
+        @click="criaSala(4)" class="full-width input-cria-sala">
+        Publicar problema
           <span slot="loading">
           <q-spinner-hourglass class="on-left" />
           Criando ...
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'ComponentFormCriarSala',
   props: ['img'],
@@ -25,6 +27,11 @@ export default {
       loading4: false,
     }
   },
+  computed: {
+    ...mapGetters({
+        user: "getUser"
+      }),
+  },
   methods: {
     criaSala() {
       this.loading4 = true;
@@ -34,7 +41,8 @@ export default {
           this.$firebase.ref('salas').push({
             img,
             nome: this.nome,
-            desc: this.descricao
+            desc: this.descricao,
+            emailCriador: this.user.email,
           }).catch(err => console.error('erro ao criar sala'))
         }).then(final => {
           this.loading4 = false

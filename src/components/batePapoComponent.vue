@@ -48,7 +48,9 @@ export default {
           let url = 'https://api-chat-aps.herokuapp.com/images/'
           if(url == sub) {
             return [`<img src="${[msg]}">`]
-          }else {
+          }else if(msg == 'goHorse'){
+            return [`<img src="./statics/goHorse.jpeg">`];
+          }else{
             return msg;
           }
        }

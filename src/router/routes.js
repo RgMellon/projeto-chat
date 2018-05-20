@@ -36,7 +36,15 @@ export default [
     ]
   },
 
-  { // Always leave this as last one
+  {
+    path: '/perfil',
+    component: () => import('layouts/perfilLayout'),
+    children: [
+      { path: '', component: () => import('pages/perfil-page') }
+    ]
+  },
+
+  {
     path: '*',
     component: () => import('pages/404')
   }
