@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div >
+    
+    <div v-if="this.icone"> 
+      <iconeComponent> </iconeComponent> 
+    </div>
+    
     <div v-if="this.confirma.length >= 1">
       <confirma-upload :id="this.id" @acao="acaoAposClicar" :imgConfirmacao="this.confirma"> </confirma-upload>
     </div>
@@ -15,12 +20,16 @@
       <textarea class="envio-input" rows="4" cols="50"
         placeholder="Escreva uma mensagem" v-model="msg">
       </textarea>
-
+      
       <router-link class="flex" :to="{ path: `/gifs/${this.id}`}">
           <button class="btn-enviar" type="button">
           <q-icon self-center name="gif" style="font-size: 30px" color="red"/> </button>
       </router-link>
-
+      
+      <button @click="icone = !icone" class="btn-enviar" type="button">
+        <q-icon name="sentiment_satisfied_alt" :color="cor"/>
+      </button>
+      
       <button class="btn-enviar" @click="enviaMsg(msg)" type="button">
         <q-icon name="send" :color="cor"/>
       </button>
@@ -30,18 +39,23 @@
 
 <script>
   import confirmaUpload from './confirmaUpload';
+  import IconeComponent from './IconeComponent';
   import { mapGetters } from 'vuex';
+  import { Emoji } from 'emoji-mart-vue'
   export default {
     props:['id'],
     name: 'envio-msg',
     components: {
       'confirma-upload' : confirmaUpload,
+      'emoji': Emoji,
+      'iconeComponent' : IconeComponent
     },
     data(){
       return {
         msg: '',
         confirma: '',
         img: '',
+        icone: false,
       }
     },
     computed: {

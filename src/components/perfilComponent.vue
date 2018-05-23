@@ -12,9 +12,13 @@
     </div>
     <div v-for="i of rooms">
       <div v-if="user.email == i.emailCriador" class="salas-criadas flex justify-around">
-        <router-link :to="`/bate-papo/${i['.key']}`" class="flex justify-around">
-         <q-icon  name="vertical_align_top"> </q-icon>
-         <p> {{ i.nome }} </p>
+        <router-link :to="`/bate-papo/${i['.key']}`" class="flex link-sala justify-around">
+          <div class="img-link">
+            <img :src="`https://api-chat-aps.herokuapp.com/images/avatar/${i.img}`">
+          </div>
+          <div class="nome-link">
+            <p> {{ i.nome }} </p>
+          </div>
         </router-link>
       </div>
     </div>
@@ -84,5 +88,13 @@ export default {
   }
   h1 {
     font-size: 16px;
+  }
+  .link-sala img{
+    width: 50px;
+    height:50px;
+  }
+  .nome-link {
+    align-self: center;
+    padding: 1rem;
   }
 </style>
