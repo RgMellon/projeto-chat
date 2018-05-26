@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase';
 import VueFire from 'vuefire';
+
 const app = initializeApp({
   apiKey: "AIzaSyCkJf1NUVet7ha3oc-UtgHNcMJ1UtG-X9E",
   authDomain: "chat-aps.firebaseapp.com",
@@ -9,7 +10,7 @@ const app = initializeApp({
   messagingSenderId: "73601295023"
 });
 
-const db =  app.database();
+export const db =  app.database();
 export const roomsRef =  db.ref('salas');
 
 export default ({ Vue }) => {

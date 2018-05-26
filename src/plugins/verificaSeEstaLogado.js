@@ -1,17 +1,9 @@
+import  { user }  from './retornaUsuario';
+let userJson = user();
 const verificaSeEstaLogado = () => {
-   let user = localStorage.getItem('vuex');
-   if(user == null || user == 'undefined') {
-     return false;
-   }else{
-    let userJson = JSON.parse(user);
-      if(userJson.user.user.nome && userJson.user.user.email != undefined){
-        if(userJson.user.user.nome && userJson.user.user.email !== ''){
-          return true;
-        }else{
-          return false;
-        }
-      }
-   }
+  if(userJson.nome && userJson.email != undefined){
+    userJson.nome && userJson.email !== '' ? true : false
+  }
 }
 
 export default ({ router }) => {

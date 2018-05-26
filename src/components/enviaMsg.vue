@@ -62,17 +62,8 @@
     },
     methods: {
       enviaMsg(msg){
-        if (msg == "") return;
-          else {
-            this.$firebase.ref(`salas/${this.id}/msgs`).push({
-              name: this.user.nome,
-              msg,
-              sent: true,
-              avatar: this.user.foto,
-              stamp: new Date().toLocaleString(),
-              email: this.user.email,
-            }).then(res => this.msg = '');
-          }
+        this.$salvaMensagem(this.id, msg);
+        this.msg = '';
       },
 
       onFileChange(e) {

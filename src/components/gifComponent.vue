@@ -42,21 +42,11 @@ export default {
                   .catch(err => this.erro =  'Erro ao carregar gifs :/ ')
     },
     enviaMsg(msg){
-      this.$firebase.ref(`salas/${this.idRoute}/msgs`).push({
-        name: this.user.nome,
-          msg: `<img src="${msg}">`,
-          sent: true,
-          avatar: this.user.foto,
-          stamp: new Date().toLocaleString(),
-          email: this.user.email,
-        }).then(this.$router.replace(`/bate-papo/${this.idRoute}`))
-      }
+      this.$salvaMensagem(this.idRoute, `<img src="${msg}">`);
+      this.$router.replace(`/bate-papo/${this.idRoute}`)
+    }
   },
-  computed: {
-    ...mapGetters({
-        user: "getUser",
-    }),
-  }
+  
 }
 </script>
 

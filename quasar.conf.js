@@ -11,7 +11,9 @@ module.exports = function (ctx) {
       'verificaSeEstaLogado',
       'chatScroll',
       'irParaHome',
-      'createImg'
+      'createImg',
+      'salvaMensagem',
+      'retornaUsuario'
     ],
     css: [
       'app.styl',
