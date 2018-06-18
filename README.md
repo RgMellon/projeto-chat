@@ -48,6 +48,12 @@
     <p align="center">
         <img width="300" src="https://user-images.githubusercontent.com/29661994/41543550-65bdb744-72ed-11e8-8a61-e7c3401c5f2d.jpg">
     </p>
+
+  Gif de exemplificação
+  <p align="center">
+        <img width="300" src="https://media.giphy.com/media/1AhQZ7FohXHByQIjEU/giphy.gif">
+    </p>
+
 ## Tecnologia utilizada
 
   - Quasar
