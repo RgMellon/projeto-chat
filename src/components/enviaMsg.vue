@@ -13,7 +13,7 @@
       </div>
 
       <textarea class="envio-input" rows="4" cols="50"
-        placeholder="Escreva uma mensagem" v-model="msg">
+        placeholder="Mensagem..." v-model="msg">
       </textarea>
       
       <router-link class="flex" :to="{ path: `/gifs/${this.id}`}">

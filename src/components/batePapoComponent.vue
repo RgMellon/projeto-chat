@@ -2,7 +2,7 @@
   <q-page padding class="row justify-center">
     <div style="width: 100%; margin-top:1rem;">
       <div class="scroll" v-chat-scroll >
-      <q-chat-message @click="teste()"
+      <q-chat-message
         v-for="(msg, index) in room"
         :key="`reg-${index}`"
         :label="msg.label" 
@@ -62,11 +62,9 @@ export default {
 }
 </script>
 <style scoped>
-  .scroll{
-    max-width: 90vw;
+  .scroll {
+    max-width: 100vw;
 	  overflow-y: scroll;
-    max-height:88vh;
-    width: 100%;
-    background: red;
-}
+    max-height:100vh;
+  }
 </style>
