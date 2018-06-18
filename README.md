@@ -48,3 +48,27 @@
     <p align="center">
         <img width="300" src="https://user-images.githubusercontent.com/29661994/41543550-65bdb744-72ed-11e8-8a61-e7c3401c5f2d.jpg">
     </p>
+## Tecnologia utilizada
+
+  - Quasar
+  - Vue.Js
+  - Laravel
+  - Firebase
+
+## Instalação
+
+``` bash
+##clone repository
+
+  $ git clone https://github.com/RgMellon/projeto-chat.git
+
+# install dependencies
+  npm install
+
+# serve with hot reload at localhost:8080
+  quasar dev -m pwa
+
+# build for production with minification
+  quasar build --mode pwa
+
+```
